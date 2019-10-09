@@ -27,6 +27,8 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableClassesPlugin from 'ckeditor5-table-classes/src/tableclasses';
+import Font from '@ckeditor/ckeditor5-font/src/font';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -52,7 +54,10 @@ ClassicEditor.builtinPlugins = [
 	Paragraph,
 	PasteFromOffice,
 	Table,
-	TableToolbar
+	TableToolbar,
+	// Custom
+	TableClassesPlugin,
+	Font
 ];
 
 // Editor configuration.
@@ -83,11 +88,16 @@ ClassicEditor.defaultConfig = {
 		]
 	},
 	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
-		]
+		contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+		table: {
+			tableToolbar: ['tableclass-style1', 'tableclass-style2']
+		},
+		TableClasses: {
+			items: [
+				{ id: 'style1', classes: 'foo bar' },
+				{ id: 'style2', classes: 'fancy' }
+			]
+		}
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
